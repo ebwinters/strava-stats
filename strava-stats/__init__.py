@@ -2,27 +2,24 @@ import logging
 
 import azure.functions as func
 import os
-from .redis_client import get_redis
+from .redis_client import get_redis, get_hash, set_hash
+from .strava import request_monthly_activities
+
+KEY = 'DIST_DICT'
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    get_redis()
-
-    name = req.params.get('name')
-    if not name:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            name = req_body.get('name')
-
-    if name:
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
-    else:
-        return func.HttpResponse(
-             "This HTTP triggered function executed successfully. " + os.environ["test"],
-             status_code=200
-        )
+    r = get_redis()
+    cache_hit = True
+    distances = get_hash(r, KEY)
+    if distances == None:
+        distances = request_monthly_activities()
+        set_hash(r, KEY, distances)
+        cache_hit = False
+    distances['cache_hit'] = 1 if cache_hit == True else 0
+    
+    return func.HttpResponse(
+             str(distances),
+             status_code=200)

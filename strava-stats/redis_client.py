@@ -13,6 +13,14 @@ def get_redis():
         db=0,
         password=os.environ["redisPassword"],
         ssl=True)
-    r.set('foo', 'bar')
-    v = r.get('foo')
-    print (v)
+    return r
+
+def set_hash(r, key, val):
+    r.hmset(key, val)
+    r.expire(key, 60)
+
+def get_hash(r, key):
+    val = r.hgetall(key)
+    if (val == {}):
+        return None
+    return val
