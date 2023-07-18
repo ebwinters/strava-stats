@@ -1,8 +1,13 @@
 import requests
 import urllib3
+from datetime import datetime
+import time
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-def 
+def get_first_day_epoch_time():
+    date_today = datetime.now()
+    month_first_day = date_today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    return time.mktime(month_first_day.timetuple())
 
 auth_url = "https://www.strava.com/oauth/token"
 activites_url = "https://www.strava.com/api/v3/athlete/activities"
