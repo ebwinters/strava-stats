@@ -2,6 +2,7 @@ import requests
 import urllib3
 from datetime import datetime
 import time
+import os
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 RUN = 'Run'
@@ -18,7 +19,7 @@ def get_access_token():
     # Leave grant type as 'refresh_token'
     payload = {
         'client_id': "75776",
-        'client_secret': '30be6635d5ff63244632097a7a04bc78e83a6241',
+        'client_secret': os.environ["clientSecret"],
         'refresh_token': '4e421f6e4900a4f856e725278fd050007b80ad40',
         'grant_type': "refresh_token",
         'f': 'json'

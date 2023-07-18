@@ -1,7 +1,6 @@
 import logging
 
 import azure.functions as func
-import os
 from .redis_client import get_redis, get_hash, set_hash
 from .strava import request_monthly_activities
 
