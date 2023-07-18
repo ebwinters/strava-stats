@@ -46,6 +46,6 @@ def request_monthly_activities():
             if (sport_type == RUN):
                 distances[RUN] += activity['distance'] * 0.000621371
 
-    distances[RIDE] = round(distances[RIDE], 1)
-    distances[RUN] = round(distances[RUN], 1)
+    distances[RIDE] = round(distances[RIDE], 2)
+    distances[RUN] = round(distances[RUN], 2)
     return distances
