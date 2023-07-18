@@ -1,5 +1,5 @@
 import logging
-
+import json
 import azure.functions as func
 from .redis_client import get_redis, get_hash, set_hash
 from .strava import request_monthly_activities
@@ -20,5 +20,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     distances['cache_hit'] = 1 if cache_hit == True else 0
     
     return func.HttpResponse(
-             str(distances),
+             json.dumps(distances),
              status_code=200)
