@@ -12,7 +12,8 @@ def get_redis():
         port=os.environ["redisPort"],
         db=0,
         password=os.environ["redisPassword"],
-        ssl=True)
+        ssl=True,
+        decode_responses=True)
     return r
 
 def set_hash(r, key, val):
