@@ -7,7 +7,7 @@ export const fetchStats = async () => {
     
 }
 
-export function Stats() {
+export const Stats = () => {
     const [ride, setRide] = React.useState(0);
     const [run, setRun] = React.useState(0);
 
