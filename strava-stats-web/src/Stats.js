@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
 import { AnimatedCounter } from  'react-animated-counter';
+import './Stats.css';
+import magnolia from './img/magnolia.jpg';
+import bridle from './img/bridle.jpg';
+import bikeImage from './img/bike.png';
+import runImage from './img/run.png';
 
 const baseUrl = 'https://strava-stats.azurewebsites.net/api/strava-stats';
 
@@ -42,20 +47,35 @@ export const Stats = () => {
     
     return (
         <div>
-            <h1 className="h1">Ride</h1>
-            <AnimatedCounter
-                includeDecimals={true}
-                value={ride}
-                color='black'
-                fontSize='40px'
-            />
-            <h1>Run</h1>
-            <AnimatedCounter
-                includeDecimals={true}
-                value={run}
-                color='black'
-                fontSize='40px'
-            />
+            <div className='container'>
+                <div className='flexHeader'>
+                    <h1 className="h1">Monthly Totals</h1>
+                </div>
+                <div className='flexBody'>
+                    <div className='flexBodyItem' style={{backgroundImage: `url(${magnolia})`, backgroundSize: 'cover'}}>
+                        <img className='icon' src={bikeImage} alt='biker' />
+                        <div className='counter'>
+                            <AnimatedCounter
+                                includeDecimals={true}
+                                value={ride}
+                                color='white'
+                                fontSize='80px'
+                            />
+                        </div>
+                    </div>
+                    <div className='flexBodyItem' style={{backgroundImage: `url(${bridle})`, backgroundSize: 'cover'}}>
+                        <img className='icon' src={runImage} alt='runner' style={{paddingTop: '2em'}} />
+                        <div className='counter'>
+                            <AnimatedCounter
+                                includeDecimals={true}
+                                value={run}
+                                color='white'
+                                fontSize='80px'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
