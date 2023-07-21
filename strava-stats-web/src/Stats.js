@@ -48,9 +48,6 @@ export const Stats = () => {
     return (
         <div>
             <div className='container'>
-                <div className='flexHeader'>
-                    <h1 className="h1">Monthly Totals</h1>
-                </div>
                 <div className='flexBody'>
                     <div className='flexBodyItem' style={{backgroundImage: `url(${magnolia})`}}>
                         <img className='icon' src={bikeImage} alt='biker' />
