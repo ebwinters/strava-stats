@@ -12,16 +12,20 @@ export const Stats = () => {
     const [run, setRun] = React.useState(0);
 
     useEffect(() => {
-        // declare the async data fetching function
-        const fetchData = async () => {
-          const data = await fetch(baseUrl);
-          const json = await data.json();
-          setRide(json.Ride);
-          setRun(json.Run)
-        }
-        fetchData()
-          .catch(console.error);;
-    }, [])
+        const intervalId = setInterval(() => {
+            fetch(baseUrl)
+              .then(data => data.json())
+              .then(json => {
+                setRide(json.Ride);
+                setRun(json.Run)
+              }
+             )
+             .catch(function(error) {
+                console.log(error)
+             })
+        }, 30000);
+        return () => clearInterval(intervalId);
+    }, []);
     
     return (
         <div>
