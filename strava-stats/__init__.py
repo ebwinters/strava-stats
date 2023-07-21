@@ -17,8 +17,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         distances = request_monthly_activities()
         set_hash(r, KEY, distances)
         cache_hit = False
-    distances['cache_hit'] = 1 if cache_hit == True else 0
+
+    logging.info('cache_hit_or_miss', {"cache_hit": 1 if cache_hit == True else 0})
     
     return func.HttpResponse(
              json.dumps(distances),
-             status_code=200)
+             status_code=200,
+             headers={cache_hit: 1 if cache_hit == True else 0})
