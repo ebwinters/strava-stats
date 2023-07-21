@@ -11,6 +11,19 @@ export const Stats = () => {
     const [ride, setRide] = React.useState(0);
     const [run, setRun] = React.useState(0);
 
+    const getData = () => fetch(baseUrl)
+        .then(data => data.json())
+        .then(json => {
+        setRide(json.Ride);
+        setRun(json.Run)
+        }
+    )
+    .catch(function(error) {
+        console.log(error)
+    });
+
+    getData();
+
     useEffect(() => {
         const intervalId = setInterval(() => {
             fetch(baseUrl)
