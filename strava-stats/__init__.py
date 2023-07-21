@@ -4,17 +4,19 @@ import azure.functions as func
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 from .redis_client import get_redis, get_hash, set_hash
 from .strava import request_monthly_activities
+import os
 
 KEY = 'DIST_DICT'
 
-
-logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler())
-
-
+_logger = logging.getLogger('opencensus')
+_logger.addHandler(
+    AzureLogHandler(
+        connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
+    )
+)
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
+    _logger.info('Python HTTP trigger function processed a request.')
 
     r = get_redis()
     cache_hit = True
@@ -25,7 +27,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         cache_hit = False
 
     properties = {'custom_dimensions':{'cache_hit': 1 if cache_hit == True else 0}}
-    logging.info('cache_hit_or_miss', extra=properties)
+    _logger.info('cache_hit_or_miss', extra=properties)
     
     return func.HttpResponse(
              json.dumps(distances),
