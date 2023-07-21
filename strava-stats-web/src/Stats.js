@@ -58,6 +58,7 @@ export const Stats = () => {
                                 color='white'
                                 fontSize='80px'
                             />
+							<p>mi</p>
                         </div>
                     </div>
                     <div className='flexBodyItem' style={{backgroundImage: `url(${bridle})`}}>
@@ -69,6 +70,7 @@ export const Stats = () => {
                                 color='white'
                                 fontSize='80px'
                             />
+							<p>mi</p>
                         </div>
                     </div>
                 </div>
