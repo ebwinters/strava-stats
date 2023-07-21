@@ -24,7 +24,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         set_hash(r, KEY, distances)
         cache_hit = False
 
-    properties = {"custom_dimensions":{"cache_hit": 1 if cache_hit == True else 0}}
+    properties = {'custom_dimensions':{'cache_hit': 1 if cache_hit == True else 0}}
     logging.info('cache_hit_or_miss', extra=properties)
     
     return func.HttpResponse(
