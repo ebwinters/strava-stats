@@ -18,7 +18,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         set_hash(r, KEY, distances)
         cache_hit = False
 
-    logging.info('cache_hit_or_miss', extra={"cache_hit": 1 if cache_hit == True else 0})
+    logging.info('cache_hit_or_miss', extra={"custom_dimensions":{"cache_hit": 1 if cache_hit == True else 0}})
     
     return func.HttpResponse(
              json.dumps(distances),
