@@ -21,6 +21,8 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    background-size: 'cover';
+    background-position: 'bottom';
 }
 
 .counter {

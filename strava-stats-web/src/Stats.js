@@ -52,7 +52,7 @@ export const Stats = () => {
                     <h1 className="h1">Monthly Totals</h1>
                 </div>
                 <div className='flexBody'>
-                    <div className='flexBodyItem' style={{backgroundImage: `url(${magnolia})`, backgroundSize: 'cover'}}>
+                    <div className='flexBodyItem' style={{backgroundImage: `url(${magnolia})`}}>
                         <img className='icon' src={bikeImage} alt='biker' />
                         <div className='counter'>
                             <AnimatedCounter
@@ -63,7 +63,7 @@ export const Stats = () => {
                             />
                         </div>
                     </div>
-                    <div className='flexBodyItem' style={{backgroundImage: `url(${bridle})`, backgroundSize: 'cover'}}>
+                    <div className='flexBodyItem' style={{backgroundImage: `url(${bridle})`}}>
                         <img className='icon' src={runImage} alt='runner' style={{paddingTop: '2em'}} />
                         <div className='counter'>
                             <AnimatedCounter
