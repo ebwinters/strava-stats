@@ -23,4 +23,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse(
              json.dumps(distances),
              status_code=200,
-             headers={cache_hit: 1 if cache_hit == True else 0})
+             headers={"cache_hit": 1 if cache_hit == True else 0})
