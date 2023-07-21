@@ -1,10 +1,16 @@
 import logging
 import json
 import azure.functions as func
+from opencensus.ext.azure.log_exporter import AzureLogHandler
 from .redis_client import get_redis, get_hash, set_hash
 from .strava import request_monthly_activities
 
 KEY = 'DIST_DICT'
+
+
+logger = logging.getLogger(__name__)
+logger.addHandler(AzureLogHandler())
+
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -18,7 +24,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         set_hash(r, KEY, distances)
         cache_hit = False
 
-    logging.info('cache_hit_or_miss', extra={"custom_dimensions":{"cache_hit": 1 if cache_hit == True else 0}})
+    properties = {"custom_dimensions":{"cache_hit": 1 if cache_hit == True else 0}}
+    logging.info('cache_hit_or_miss', extra=properties)
     
     return func.HttpResponse(
              json.dumps(distances),
